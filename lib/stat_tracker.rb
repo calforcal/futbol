@@ -1,11 +1,12 @@
 require "csv"
 require './lib/team_factory_module'  
 require_relative './game_factory_module'
-require './lib/team'
+require_relative './game_teams_factory_module'
 
 class StatTracker
   include TeamFactoryModule
   include GameFactoryModule
+  include GameTeamsFactoryModule
 
   attr_reader :games, :teams, :game_teams
 

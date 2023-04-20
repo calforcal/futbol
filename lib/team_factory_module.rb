@@ -1,6 +1,7 @@
+require './lib/team'
 module TeamFactoryModule
   def create_teams(team_path)
-    teams = CSV.open './data/teams.csv', headers: true, header_converters: :symbol
+    teams = CSV.open team_path, headers: true, header_converters: :symbol
       teams.map do |team|
         details = {
           team_id: team[:team_id],
