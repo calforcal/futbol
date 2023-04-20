@@ -6,6 +6,6 @@ class Game
     @season = details[:season]
     @home_goals = details[:home_goals]
     @away_goals = details[:away_goals]
-    @total_goals = details[:total_goals]
+    @total_goals = details[:away_goals].to_i + details[:home_goals].to_i
   end
 end
