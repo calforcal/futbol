@@ -1,7 +1,10 @@
 require "csv"
+require './lib/team_factory_module'
+require './lib/team'
 
 
 class StatTracker
+  include TeamFactoryModule
   attr_reader :games, :teams, :game_teams
 
   def initialize(locations)
@@ -14,17 +17,10 @@ class StatTracker
   def create_games(game_path)
     games = CSV.readlines game_path, headers: true, header_converters: :symbol
     games.each do |game|
-
       # p game
     end
   end
 
-  def create_teams(team_path)
-    teams = CSV.open team_path, headers: true, header_converters: :symbol
-    teams.each do |team|
-      # p team
-    end
-  end
 
   def create_game_teams(game_teams_path)
     game_teams = CSV.open game_teams_path, headers: true, header_converters: :symbol
