@@ -21,6 +21,35 @@ class StatTracker
     StatTracker.new(locations)
   end
 
+  def highest_total_score
+    total = @games.max_by do |game|
+      game.total_goals
+    end
+    total.total_goals
+  end
+
+  def lowest_total_score
+    lowest_total = @games.min_by do |game|
+      game.total_goals
+    end
+    lowest_total.total_goals
+  end
+
+  def percentage_home_wins
+    home_wins = @games.count do |game|
+      game.home_goals > game.away_goals
+    end 
+    percent = home_wins / games.count.to_f
+    percent.round(2)
+  end
+
+  def percentage_visitor_wins
+    away_wins = @games.count do |game|
+      game.away_goals > game.home_goals
+    end 
+    percent = away_wins / games.count.to_f
+    percent.round(2)
+
   def percentage_ties
     total_games = @games.count
     total_ties = @games.count { |game| game.away_goals == game.home_goals }
