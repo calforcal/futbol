@@ -173,4 +173,55 @@ RSpec.describe StatTracker do
       expect(stat_tracker.average_goals_by_season).to eq(expected)
     end
   end
+
+  describe "#most_accurate_team" do
+    it "can find the most accurate team for a specific season based on shot to goal ratio" do
+      game_path = './data/games.csv'
+      team_path = './data/teams.csv'
+      game_teams_path = './data/game_teams.csv'
+      locations = 
+      {
+        games: game_path,
+        teams: team_path,
+        game_teams: game_teams_path
+      }
+      stat_tracker = StatTracker.from_csv(locations)
+
+      expect(stat_tracker.most_accurate_team("20132014")).to eq("Real Salt Lake")
+    end
+  end
+
+  describe "#least_accurate_team" do
+    it "can find the least accurate team for a specific season based on shot to goal ratio" do
+      game_path = './data/games.csv'
+      team_path = './data/teams.csv'
+      game_teams_path = './data/game_teams.csv'
+      locations = 
+      {
+        games: game_path,
+        teams: team_path,
+        game_teams: game_teams_path
+      }
+      stat_tracker = StatTracker.from_csv(locations)
+
+      expect(stat_tracker.least_accurate_team("20132014")).to eq("New York City FC")
+    end
+  end
+
+  describe "#most_tackles" do
+    it "can find the name of the team with the most tackles in a specfic season" do
+      game_path = './data/games.csv'
+      team_path = './data/teams.csv'
+      game_teams_path = './data/game_teams.csv'
+      locations = 
+      {
+        games: game_path,
+        teams: team_path,
+        game_teams: game_teams_path
+      }
+      stat_tracker = StatTracker.from_csv(locations)
+
+      expect(stat_tracker.most_tackles("20132014")).to eq("FC Cincinnati")
+    end
+  end
 end
