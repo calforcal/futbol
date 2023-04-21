@@ -1,4 +1,4 @@
-require_relative './stat_tracker'
+require './lib/stat_tracker'
 
 game_path = './data/games.csv'
 team_path = './data/teams.csv'
