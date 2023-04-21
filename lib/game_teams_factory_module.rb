@@ -1,4 +1,4 @@
-require './lib/game_teams'
+require_relative './game_teams'
 module GameTeamsFactoryModule
   def create_game_teams(game_teams_path)
     games_teams = CSV.open game_teams_path, headers: true, header_converters: :symbol

@@ -1,4 +1,4 @@
-require './lib/team'
+require_relative './team'
 module TeamFactoryModule
   def create_teams(team_path)
     teams = CSV.open team_path, headers: true, header_converters: :symbol
