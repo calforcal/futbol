@@ -10,6 +10,5 @@ class GameTeams
       @goals = details[:goals],
       @shots = details[:shots],
       @tackles = details[:tackles]
-      require 'pry'; binding.pry
   end
 end
