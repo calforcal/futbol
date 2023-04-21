@@ -6,7 +6,7 @@ RSpec.describe StatTracker do
     it 'exists' do
       game_path = './data/games.csv'
       team_path = './data/teams.csv'
-      game_teams_path = './data/game_teams.csv'
+      game_teams_path = './fixture/game_teams_fixture.csv'
       locations = 
       {
         games: game_path,
