@@ -82,4 +82,48 @@ class StatTracker
       [season, (season_goals.to_f / season_games_played.to_f).round(2)]
     end.to_h
   end
+
+  def count_of_teams
+    @teams.count
+  end
+
+  def best_offense
+    team_avg_goals = {}
+    @teams.each do |team|
+      team_games = @games.select do |game| 
+        game.home_team_id == team.team_id || game.away_team_id == team.team_id 
+      end
+      goals = team_games.map do |game| 
+        if team.team_id == game.home_team_id
+          game.home_goals.to_i
+        elsif team.team_id == game.away_team_id
+          game.away_goals.to_i
+        end
+      end.sum
+      team_avg_goals[team.team_name] = goals.to_f / team_games.count
+    end
+    team_avg_goals.max_by do |team_name, avg_goals|
+      avg_goals
+    end.first
+  end
+
+  def worst_offense
+    team_avg_goals = {}
+    @teams.each do |team|
+      team_games = @games.select do |game| 
+        game.home_team_id == team.team_id || game.away_team_id == team.team_id 
+      end
+      goals = team_games.map do |game| 
+        if team.team_id == game.home_team_id
+          game.home_goals.to_i
+        elsif team.team_id == game.away_team_id
+          game.away_goals.to_i
+        end
+      end.sum
+      team_avg_goals[team.team_name] = goals.to_f / team_games.count
+    end
+    team_avg_goals.min_by do |team_name, avg_goals|
+      avg_goals
+    end.first
+  end
 end
