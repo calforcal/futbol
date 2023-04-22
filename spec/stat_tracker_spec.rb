@@ -173,4 +173,54 @@ RSpec.describe StatTracker do
       expect(stat_tracker.average_goals_by_season).to eq(expected)
     end
   end
+
+  describe "#count_of_teams" do
+    it "can count total number of teams in the data" do
+      game_path = './data/games.csv'
+      team_path = './data/teams.csv'
+      game_teams_path = './data/game_teams.csv'
+      locations = 
+      {
+        games: game_path,
+        teams: team_path,
+        game_teams: game_teams_path
+      }
+      stat_tracker = StatTracker.from_csv(locations)
+      expect(stat_tracker.count_of_teams).to eq(32)
+    end
+  end
+
+  describe "#best_offense" do
+    it "returns name of the team with the highest average number of goals scored per game across all seasons" do
+      game_path = './data/games.csv'
+      team_path = './data/teams.csv'
+      game_teams_path = './data/game_teams.csv'
+      locations = 
+      {
+        games: game_path,
+        teams: team_path,
+        game_teams: game_teams_path
+      }
+      stat_tracker = StatTracker.from_csv(locations)
+      expect(stat_tracker.best_offense).to eq("Reign FC")
+    end
+  end
+
+  describe "#worst_offense" do
+    it "returns name of the team with the lowest average number of goals scored per game across all seasons" do
+      game_path = './data/games.csv'
+      team_path = './data/teams.csv'
+      game_teams_path = './data/game_teams.csv'
+      locations = 
+      {
+        games: game_path,
+        teams: team_path,
+        game_teams: game_teams_path
+      }
+      stat_tracker = StatTracker.from_csv(locations)
+      expect(stat_tracker.worst_offense).to eq("Utah Royals FC")
+    end
+  end
 end
+
+
