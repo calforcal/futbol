@@ -173,4 +173,104 @@ RSpec.describe StatTracker do
       expect(stat_tracker.average_goals_by_season).to eq(expected)
     end
   end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  describe "#highest_scoring_vistor" do
+    it "can name the team with the highest average score per game when they are away" do
+      game_path = './data/games.csv'
+      team_path = './data/teams.csv'
+      game_teams_path = './data/game_teams.csv'
+      locations = 
+      {
+        games: game_path,
+        teams: team_path,
+        game_teams: game_teams_path
+      }
+      stat_tracker = StatTracker.from_csv(locations)
+      expect(stat_tracker.highest_scoring_visitor).to eq("FC Dallas")
+    end
+  end
+
+  describe "#highest_scoring_home_team" do
+    it "can name the team with the highest average score per game when they are home" do
+      game_path = './data/games.csv'
+      team_path = './data/teams.csv'
+      game_teams_path = './data/game_teams.csv'
+      locations = 
+      {
+        games: game_path,
+        teams: team_path,
+        game_teams: game_teams_path
+      }
+      stat_tracker = StatTracker.from_csv(locations)
+      expect(stat_tracker.highest_scoring_home_team).to eq("Reign FC")
+    end
+  end
+
+  describe "#lowest_scoring_vistor" do
+    it "can name the team with the lowest average score per game when they are away" do
+      game_path = './data/games.csv'
+      team_path = './data/teams.csv'
+      game_teams_path = './data/game_teams.csv'
+      locations = 
+      {
+        games: game_path,
+        teams: team_path,
+        game_teams: game_teams_path
+      }
+      stat_tracker = StatTracker.from_csv(locations)
+      expect(stat_tracker.lowest_scoring_visitor).to eq("San Jose Earthquakes")
+    end
+  end
 end
