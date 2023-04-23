@@ -8,7 +8,9 @@ module GameFactoryModule
         season: game[:season],
         home_goals: game[:home_goals],
         away_goals: game[:away_goals],
-        total_goals: game[:away_goals].to_i + game[:home_goals].to_i
+        total_goals: game[:away_goals].to_i + game[:home_goals].to_i,
+        away_team_id: game[:away_team_id],
+        home_team_id: game[:home_team_id]
       }
       Game.new(details)
     end
