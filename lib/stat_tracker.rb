@@ -83,94 +83,6 @@ class StatTracker
     end.to_h
   end
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
   def highest_scoring_visitor
     all_away_teams_goals_avg = {}
     teams.each do |team|
@@ -223,6 +135,94 @@ class StatTracker
     all_away_teams_goals_avg.min_by do |team_name, avg_away_goals|
       avg_away_goals
     end.first
+  end
+  
+  def most_accurate_team(season)
+    season_games = @games.select do |game|
+      game.season == season
+    end
+    season_game_teams = []
+    season_games.each do |game|
+      @game_teams.each do |game_team|
+        if game.game_id == game_team.game_id
+          season_game_teams << game_team
+        end
+      end
+    end
+
+    team_hash = @teams.map do |team|
+      teams_games = season_game_teams.select { |game_team| game_team.team_id == team.team_id}
+      team_shots = teams_games.map { |team_game| team_game.shots.to_i }.sum.to_f
+      team_goals = teams_games.map { |team_game| team_game.goals.to_i }.sum.to_f
+      [team.team_name, (team_shots / team_goals).round(2)]
+    end.to_h
+
+    min = 100
+    best_team = ""
+    team_hash.each_pair do |team, value|
+      if value < min
+        min = value
+        best_team = team
+      end
+    end
+    best_team
+  end
+
+  def least_accurate_team(season)
+    season_games = @games.select { |game| game.season == season }
+    season_game_teams = []
+    season_games.each do |game|
+      @game_teams.each do |game_team|
+        if game.game_id == game_team.game_id
+          season_game_teams << game_team
+        end
+      end
+    end
+
+    team_hash = @teams.map do |team|
+      teams_games = season_game_teams.select { |game_team| game_team.team_id == team.team_id}
+      team_shots = teams_games.map { |team_game| team_game.shots.to_i }.sum.to_f
+      team_goals = teams_games.map { |team_game| team_game.goals.to_i }.sum.to_f
+      [team.team_name, (team_shots / team_goals).round(2)]
+    end.to_h
+
+    max = 0
+    worst_team = ""
+    team_hash.each_pair do |team, value|
+      if value > max
+        max = value
+        worst_team = team
+      end
+    end
+    worst_team
+  end
+
+  def most_tackles(season)
+    season_games = @games.select { |game| game.season == season }
+    season_game_teams = []
+    season_games.each do |game|
+      @game_teams.each do |game_team|
+        if game.game_id == game_team.game_id
+          season_game_teams << game_team
+        end
+      end
+    end
+
+    team_hash = @teams.map do |team|
+      teams_games = season_game_teams.select { |game_team| game_team.team_id == team.team_id}
+      team_tackles = teams_games.map { |team_game| team_game.tackles.to_i }.sum.to_f
+      [team.team_name, team_tackles]
+    end.to_h
+
+    max = 0
+    best_team = ""
+    team_hash.each_pair do |team, value|
+      if value > max
+        max = value
+        best_team = team
+      end
+    end
+    best_team
   end
 end
 
