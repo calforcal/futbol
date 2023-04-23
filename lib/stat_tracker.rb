@@ -83,6 +83,60 @@ class StatTracker
     end.to_h
   end
 
+  def highest_scoring_visitor
+    all_away_teams_goals_avg = {}
+    teams.each do |team|
+      team_games = games.select do |game|
+        game.away_team_id == team.team_id
+      end
+      away_goals = team_games.map do |game|
+        if team.team_id == game.away_team_id
+          game.away_goals.to_i
+        end
+      end.sum
+      all_away_teams_goals_avg[team.team_name] = away_goals / team_games.count.to_f
+    end
+    all_away_teams_goals_avg.max_by do |team_name, avg_away_goals|
+      avg_away_goals
+    end.first
+  end
+
+  def highest_scoring_home_team
+    all_home_teams_goals_avg = {}
+    teams.each do |team|
+      team_games = games.select do |game|
+        game.home_team_id == team.team_id
+      end
+      home_goals = team_games.map do |game|
+        if team.team_id == game.home_team_id
+          game.home_goals.to_i
+        end
+      end.sum
+      all_home_teams_goals_avg[team.team_name] = home_goals / team_games.count.to_f
+    end
+    all_home_teams_goals_avg.max_by do |team_name, avg_home_goals|
+      avg_home_goals
+    end.first
+  end
+
+  def lowest_scoring_visitor
+    all_away_teams_goals_avg = {}
+    teams.each do |team|
+      team_games = games.select do |game|
+        game.away_team_id == team.team_id
+      end
+      away_goals = team_games.map do |game|
+        if team.team_id == game.away_team_id
+          game.away_goals.to_i
+        end
+      end.sum
+      all_away_teams_goals_avg[team.team_name] = away_goals / team_games.count.to_f
+    end
+    all_away_teams_goals_avg.min_by do |team_name, avg_away_goals|
+      avg_away_goals
+    end.first
+  end
+  
   def most_accurate_team(season)
     season_games = @games.select do |game|
       game.season == season
@@ -171,3 +225,5 @@ class StatTracker
     best_team
   end
 end
+
+

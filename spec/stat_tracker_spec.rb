@@ -174,6 +174,54 @@ RSpec.describe StatTracker do
     end
   end
 
+  describe "#highest_scoring_vistor" do
+    it "can name the team with the highest average score per game when they are away" do
+      game_path = './data/games.csv'
+      team_path = './data/teams.csv'
+      game_teams_path = './data/game_teams.csv'
+      locations = 
+      {
+        games: game_path,
+        teams: team_path,
+        game_teams: game_teams_path
+      }
+      stat_tracker = StatTracker.from_csv(locations)
+      expect(stat_tracker.highest_scoring_visitor).to eq("FC Dallas")
+    end
+  end
+  
+  describe "#lowest_scoring_vistor" do
+    it "can name the team with the lowest average score per game when they are away" do
+      game_path = './data/games.csv'
+      team_path = './data/teams.csv'
+      game_teams_path = './data/game_teams.csv'
+      locations = 
+      {
+        games: game_path,
+        teams: team_path,
+        game_teams: game_teams_path
+      }
+      stat_tracker = StatTracker.from_csv(locations)
+      expect(stat_tracker.lowest_scoring_visitor).to eq("San Jose Earthquakes")
+    end
+  end
+  
+  describe "#highest_scoring_home_team" do
+    it "can name the team with the highest average score per game when they are home" do
+      game_path = './data/games.csv'
+      team_path = './data/teams.csv'
+      game_teams_path = './data/game_teams.csv'
+      locations = 
+      {
+        games: game_path,
+        teams: team_path,
+        game_teams: game_teams_path
+      }
+      stat_tracker = StatTracker.from_csv(locations)
+      expect(stat_tracker.highest_scoring_home_team).to eq("Reign FC")
+    end
+  end
+  
   describe "#most_accurate_team" do
     it "can find the most accurate team for a specific season based on shot to goal ratio" do
       game_path = './data/games.csv'
@@ -186,11 +234,11 @@ RSpec.describe StatTracker do
         game_teams: game_teams_path
       }
       stat_tracker = StatTracker.from_csv(locations)
-
+      
       expect(stat_tracker.most_accurate_team("20132014")).to eq("Real Salt Lake")
     end
   end
-
+  
   describe "#least_accurate_team" do
     it "can find the least accurate team for a specific season based on shot to goal ratio" do
       game_path = './data/games.csv'
@@ -203,7 +251,6 @@ RSpec.describe StatTracker do
         game_teams: game_teams_path
       }
       stat_tracker = StatTracker.from_csv(locations)
-
       expect(stat_tracker.least_accurate_team("20132014")).to eq("New York City FC")
     end
   end
@@ -220,7 +267,6 @@ RSpec.describe StatTracker do
         game_teams: game_teams_path
       }
       stat_tracker = StatTracker.from_csv(locations)
-
       expect(stat_tracker.most_tackles("20132014")).to eq("FC Cincinnati")
     end
   end
