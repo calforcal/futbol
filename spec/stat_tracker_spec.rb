@@ -6,7 +6,7 @@ RSpec.describe StatTracker do
     it 'exists' do
       game_path = './data/games.csv'
       team_path = './data/teams.csv'
-      game_teams_path = './data/game_teams.csv'
+      game_teams_path = './fixture/game_teams_fixture.csv'
       locations = 
       {
         games: game_path,
@@ -173,32 +173,212 @@ RSpec.describe StatTracker do
       expect(stat_tracker.average_goals_by_season).to eq(expected)
     end
   end
+
+  describe "#count_of_teams" do
+    it "can count total number of teams in the data" do
+      game_path = './data/games.csv'
+      team_path = './data/teams.csv'
+      game_teams_path = './data/game_teams.csv'
+      locations = 
+      {
+        games: game_path,
+        teams: team_path,
+        game_teams: game_teams_path
+      }
+      stat_tracker = StatTracker.from_csv(locations)
+      expect(stat_tracker.count_of_teams).to eq(32)
+    end
+  end
+
+  describe "#highest_scoring_vistor" do
+    it "can name the team with the highest average score per game when they are away" do
+      game_path = './data/games.csv'
+      team_path = './data/teams.csv'
+      game_teams_path = './data/game_teams.csv'
+      locations = 
+      {
+        games: game_path,
+        teams: team_path,
+        game_teams: game_teams_path
+      }
+      stat_tracker = StatTracker.from_csv(locations)
+      expect(stat_tracker.highest_scoring_visitor).to eq("FC Dallas")
+    end
+  end
+
+  describe "#best_offense" do
+    it "returns name of the team with the highest average number of goals scored per game across all seasons" do
+      game_path = './data/games.csv'
+      team_path = './data/teams.csv'
+      game_teams_path = './data/game_teams.csv'
+      locations = 
+      {
+        games: game_path,
+        teams: team_path,
+        game_teams: game_teams_path
+      }
+      stat_tracker = StatTracker.from_csv(locations)
+      expect(stat_tracker.best_offense).to eq("Reign FC")
+    end
+  end
+  
+  describe "#lowest_scoring_vistor" do
+    it "can name the team with the lowest average score per game when they are away" do
+      game_path = './data/games.csv'
+      team_path = './data/teams.csv'
+      game_teams_path = './data/game_teams.csv'
+      locations = 
+      {
+        games: game_path,
+        teams: team_path,
+        game_teams: game_teams_path
+      }
+      stat_tracker = StatTracker.from_csv(locations)
+      expect(stat_tracker.lowest_scoring_visitor).to eq("San Jose Earthquakes")
+    end
+  end
+
+  describe "#worst_offense" do
+    it "returns name of the team with the lowest average number of goals scored per game across all seasons" do
+      game_path = './data/games.csv'
+      team_path = './data/teams.csv'
+      game_teams_path = './data/game_teams.csv'
+      locations = 
+      {
+        games: game_path,
+        teams: team_path,
+        game_teams: game_teams_path
+      }
+      stat_tracker = StatTracker.from_csv(locations)
+      expect(stat_tracker.worst_offense).to eq("Utah Royals FC")
+    end
+  end
+  
+  describe "#highest_scoring_home_team" do
+    it "can name the team with the highest average score per game when they are home" do
+      game_path = './data/games.csv'
+      team_path = './data/teams.csv'
+      game_teams_path = './data/game_teams.csv'
+      locations = 
+      {
+        games: game_path,
+        teams: team_path,
+        game_teams: game_teams_path
+      }
+      stat_tracker = StatTracker.from_csv(locations)
+      expect(stat_tracker.highest_scoring_home_team).to eq("Reign FC")
+    end
+  end
+  
+  describe "#most_accurate_team" do
+    it "can find the most accurate team for a specific season based on shot to goal ratio" do
+      game_path = './data/games.csv'
+      team_path = './data/teams.csv'
+      game_teams_path = './data/game_teams.csv'
+      locations = 
+      {
+        games: game_path,
+        teams: team_path,
+        game_teams: game_teams_path
+      }
+      stat_tracker = StatTracker.from_csv(locations)
+      
+      expect(stat_tracker.most_accurate_team("20132014")).to eq("Real Salt Lake")
+    end
+  end
+  
+  describe "#least_accurate_team" do
+    it "can find the least accurate team for a specific season based on shot to goal ratio" do
+      game_path = './data/games.csv'
+      team_path = './data/teams.csv'
+      game_teams_path = './data/game_teams.csv'
+      locations = 
+      {
+        games: game_path,
+        teams: team_path,
+        game_teams: game_teams_path
+      }
+      stat_tracker = StatTracker.from_csv(locations)
+      expect(stat_tracker.least_accurate_team("20132014")).to eq("New York City FC")
+    end
+  end
+
+  describe "#most_tackles" do
+    it "can find the name of the team with the most tackles in a specfic season" do
+      game_path = './data/games.csv'
+      team_path = './data/teams.csv'
+      game_teams_path = './data/game_teams.csv'
+      locations = 
+      {
+        games: game_path,
+        teams: team_path,
+        game_teams: game_teams_path
+      }
+      stat_tracker = StatTracker.from_csv(locations)
+      expect(stat_tracker.most_tackles("20132014")).to eq("FC Cincinnati")
+    end
+  end
+
+  describe "#lowest_scoring_home_team" do
+    it 'can return the home team with the lowest average score per game in all seasons' do
+    game_path = './data/games.csv'
+    team_path = './data/teams.csv'
+    game_teams_path = './data/game_teams.csv'
+    locations =
+    {
+      games: game_path,
+      teams: team_path,
+      game_teams: game_teams_path
+    }
+    stat_tracker = StatTracker.from_csv(locations)
+    expect(stat_tracker.lowest_scoring_home_team).to eq("Utah Royals FC")
+    end
+  end
+  describe "#winningest_coach" do
+    it "Can name the coach with the best win percentage for the season" do
+      game_path = './data/games.csv'
+      team_path = './data/teams.csv'
+      game_teams_path = './data/game_teams.csv'
+      locations =
+      {
+        games: game_path,
+        teams: team_path,
+        game_teams: game_teams_path
+      }
+      stat_tracker = StatTracker.from_csv(locations)
+      expect(stat_tracker.winningest_coach(20122013)).to eq("Claude Julien")
+    end
+  end
+
+  describe "#worst_coach" do
+    it "Can return the coach with the worst win percentage" do
+      game_path = './data/games.csv'
+      team_path = './data/teams.csv'
+      game_teams_path = './data/game_teams.csv'
+      locations =
+      {
+        games: game_path,
+        teams: team_path,
+        game_teams: game_teams_path
+      }
+      stat_tracker = StatTracker.from_csv(locations)
+      expect(stat_tracker.worst_coach("20132014")).to eq "Peter Laviolette"
+    end
+  end
+
+  describe "#fewest_tackles" do
+    it "Can return the team with the fewest tackles" do
+      game_path = './data/games.csv'
+      team_path = './data/teams.csv'
+      game_teams_path = './data/game_teams.csv'
+      locations =
+      {
+        games: game_path,
+        teams: team_path,
+        game_teams: game_teams_path
+      }
+      stat_tracker = StatTracker.from_csv(locations)
+      expect(stat_tracker.fewest_tackles("20132014")).to eq "Atlanta United"
+    end
+  end
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
