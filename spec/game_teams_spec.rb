@@ -16,7 +16,7 @@ RSpec.describe GameTeams do
       }
       game_teams = GameTeams.new(details)
       expect(game_teams).to be_a(GameTeams)
-      expect(game_teams.game_id.first).to eq("2012030221") #Needed to add .first as it's returning an array
+      expect(game_teams.game_id).to eq("2012030221") #Needed to add .first as it's returning an array
       expect(game_teams.team_id).to eq("3")
       expect(game_teams.hoa).to eq("away")
       expect(game_teams.result).to eq("LOSS")

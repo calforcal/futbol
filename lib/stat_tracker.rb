@@ -49,6 +49,7 @@ class StatTracker
     end 
     percent = away_wins / games.count.to_f
     percent.round(2)
+  end
 
   def percentage_ties
     total_games = @games.count
@@ -82,3 +83,52 @@ class StatTracker
     end.to_h
   end
 end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
