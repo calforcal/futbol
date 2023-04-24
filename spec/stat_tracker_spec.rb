@@ -190,7 +190,7 @@ RSpec.describe StatTracker do
     end
   end
 
-  describe "#highest_scoring_vistor" do
+  describe "#highest_scoring_visitor" do
     it "can name the team with the highest average score per game when they are away" do
       game_path = './data/games.csv'
       team_path = './data/teams.csv'
@@ -222,7 +222,7 @@ RSpec.describe StatTracker do
     end
   end
   
-  describe "#lowest_scoring_vistor" do
+  describe "#lowest_scoring_visitor" do
     it "can name the team with the lowest average score per game when they are away" do
       game_path = './data/games.csv'
       team_path = './data/teams.csv'
@@ -346,7 +346,7 @@ RSpec.describe StatTracker do
         game_teams: game_teams_path
       }
       stat_tracker = StatTracker.from_csv(locations)
-      expect(stat_tracker.winningest_coach(20122013)).to eq("Claude Julien")
+      expect(stat_tracker.winningest_coach("20142015")).to eq("Alain Vigneault")
     end
   end
 

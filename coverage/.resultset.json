@@ -1,7 +1,7 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/jimmyjurado/Turing/1mod/Projects/futbol/lib/stat_tracker.rb": {
+      "/Users/michaelcallahan/turing_work/1mod/projects/futbol/lib/stat_tracker.rb": {
         "lines": [
           1,
           1,
@@ -301,12 +301,13 @@
           1,
           1,
           1,
-          1646,
-          1646,
-          34,
-          34,
-          null,
+          2673,
+          2673,
+          2673,
           35,
+          35,
+          null,
+          36,
           1,
           null,
           null,
@@ -394,7 +395,7 @@
           null
         ]
       },
-      "/Users/jimmyjurado/Turing/1mod/Projects/futbol/lib/team_factory_module.rb": {
+      "/Users/michaelcallahan/turing_work/1mod/projects/futbol/lib/team_factory_module.rb": {
         "lines": [
           1,
           1,
@@ -415,22 +416,22 @@
           null
         ]
       },
-      "/Users/jimmyjurado/Turing/1mod/Projects/futbol/lib/team.rb": {
+      "/Users/michaelcallahan/turing_work/1mod/projects/futbol/lib/team.rb": {
         "lines": [
           1,
           1,
           1,
-          736,
-          736,
-          736,
-          736,
-          736,
-          736,
+          737,
+          737,
+          737,
+          737,
+          737,
+          737,
           null,
           null
         ]
       },
-      "/Users/jimmyjurado/Turing/1mod/Projects/futbol/lib/game_factory_module.rb": {
+      "/Users/michaelcallahan/turing_work/1mod/projects/futbol/lib/game_factory_module.rb": {
         "lines": [
           1,
           1,
@@ -452,24 +453,7 @@
           null
         ]
       },
-      "/Users/jimmyjurado/Turing/1mod/Projects/futbol/lib/game.rb": {
-        "lines": [
-          1,
-          1,
-          null,
-          1,
-          171146,
-          171146,
-          171146,
-          171146,
-          171146,
-          171146,
-          171146,
-          null,
-          null
-        ]
-      },
-      "/Users/jimmyjurado/Turing/1mod/Projects/futbol/lib/game_teams_factory_module.rb": {
+      "/Users/michaelcallahan/turing_work/1mod/projects/futbol/lib/game_teams_factory_module.rb": {
         "lines": [
           1,
           1,
@@ -494,25 +478,36 @@
           null
         ]
       },
-      "/Users/jimmyjurado/Turing/1mod/Projects/futbol/lib/game_teams.rb": {
+      "/Users/michaelcallahan/turing_work/1mod/projects/futbol/spec/team_spec.rb": {
         "lines": [
           1,
           1,
+          null,
           1,
-          327438,
-          327438,
-          327438,
-          327438,
-          327438,
-          327438,
-          327438,
-          327438,
-          327438,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
           null,
           null
         ]
       }
     },
-    "timestamp": 1682347546
+    "timestamp": 1682352682
   }
 }

@@ -291,14 +291,15 @@ class StatTracker
   end
 
   def winningest_coach(season)
-    season_str = season.to_s
+    season_str = season
     season_games = @game_teams.select { |game| game.game_id.to_s[0,4] == season_str[0,4] }
     games_by_coach = season_games.group_by(&:head_coach)
     win_percentages = {}
     games_by_coach.each do |coach, games|
       win_count = games.count { |game| game.result == "WIN" }
       loss_count = games.count { |game| game.result == "LOSS" }
-      total_games = win_count + loss_count
+      tie_count = games.count { |game| game.result == "TIE" }
+      total_games = win_count + loss_count + tie_count
       win_percentages[coach] = total_games >= 2 ? win_count.to_f / total_games : 0
     end
     winningest_coach = win_percentages.max_by { |coach, win_percentage| win_percentage }&.first
