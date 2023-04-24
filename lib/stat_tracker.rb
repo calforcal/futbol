@@ -268,6 +268,122 @@ class StatTracker
     end
     best_team
   end
+
+  def lowest_scoring_home_team
+  grouped_teams = @game_teams.group_by { |game| game.team_id }
+  avg_scores = {}
+  grouped_teams.each do |team_id, games|
+    home_games = games.select { |game| game.hoa == "home" }
+    total_goals = home_games.sum { |game| game.goals.to_i }
+    avg_score = total_goals.to_f / home_games.length
+    avg_scores[team_id] = avg_score
+  end
+  team_id_with_lowest_score = nil
+  lowest_score = Float::INFINITY
+  avg_scores.each do |team_id, avg_score|
+    if avg_score < lowest_score
+      team_id_with_lowest_score = team_id
+      lowest_score = avg_score
+    end
+  end
+  team = @teams.find { |team| team.team_id == team_id_with_lowest_score }
+  team.team_name
+  end
+
+  def winningest_coach(season)
+    season_str = season.to_s
+    season_games = @game_teams.select { |game| game.game_id.to_s[0,4] == season_str[0,4] }
+    games_by_coach = season_games.group_by(&:head_coach)
+    win_percentages = {}
+    games_by_coach.each do |coach, games|
+      win_count = games.count { |game| game.result == "WIN" }
+      loss_count = games.count { |game| game.result == "LOSS" }
+      total_games = win_count + loss_count
+      win_percentages[coach] = total_games >= 2 ? win_count.to_f / total_games : 0
+    end
+    winningest_coach = win_percentages.max_by { |coach, win_percentage| win_percentage }&.first
+    return winningest_coach
+  end
+
+  def worst_coach(season)
+    game_teams = []
+    @game_teams.each do |game|
+      if game.game_id.to_s[0,4] == season[0,4]
+        game_teams << game
+      end
+    end
+  
+    games_coached = {}
+    game_teams.each do |game|
+      if games_coached[game.head_coach]
+        games_coached[game.head_coach] << game
+      else
+        games_coached[game.head_coach] = [game]
+      end
+    end
+    games_coached.each do |coach, games|
+      wins = 0
+      games.each do |game|
+        if game.result == "WIN"
+          wins += 1
+        end
+      end
+      win_percentage = wins.to_f / games.length
+      games_coached[coach] = win_percentage
+    end
+    worst_coach = nil
+    worst_win_percentage = 1.0
+    games_coached.each do |coach, win_percentage|
+      if win_percentage < worst_win_percentage
+        worst_coach = coach
+        worst_win_percentage = win_percentage
+      end
+    end
+    return worst_coach
+  end
+
+  def fewest_tackles(season)
+    filtered_game_teams = filter_game_teams(generate_game_ids(games_by_season(season)))
+
+    fewest_tackles_team_id = find_total_tackles_by_team(filtered_game_teams).min_by do |_, tackles|
+      tackles
+    end[0]
+
+    get_team_name(fewest_tackles_team_id)
+  end
+
+  def filter_game_teams(game_ids)
+    @game_teams.find_all do |game_team|
+      game_ids.include?(game_team.game_id)
+    end
+  end
+
+  def get_team_name(id)
+    @teams.find do |team|
+      team.team_id == id
+    end.team_name
+  end
+
+  def generate_game_ids(games)
+    games.map(&:game_id)
+  end
+
+  def games_by_season(season)
+    @games.find_all do |game|
+      game.season == season
+    end
+  end
+
+  def find_total_tackles_by_team(game_teams)
+    total_tackles_by_team = Hash.new(0)
+
+    game_teams.each do |game_team|
+      total_tackles_by_team[game_team.team_id] += game_team.tackles.to_i
+    end
+
+    total_tackles_by_team
+  end
+
 end
 
 

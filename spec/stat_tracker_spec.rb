@@ -318,4 +318,67 @@ RSpec.describe StatTracker do
       expect(stat_tracker.most_tackles("20132014")).to eq("FC Cincinnati")
     end
   end
+
+  describe "#lowest_scoring_home_team" do
+    it 'can return the home team with the lowest average score per game in all seasons' do
+    game_path = './data/games.csv'
+    team_path = './data/teams.csv'
+    game_teams_path = './data/game_teams.csv'
+    locations =
+    {
+      games: game_path,
+      teams: team_path,
+      game_teams: game_teams_path
+    }
+    stat_tracker = StatTracker.from_csv(locations)
+    expect(stat_tracker.lowest_scoring_home_team).to eq("Utah Royals FC")
+    end
+  end
+  describe "#winningest_coach" do
+    it "Can name the coach with the best win percentage for the season" do
+      game_path = './data/games.csv'
+      team_path = './data/teams.csv'
+      game_teams_path = './data/game_teams.csv'
+      locations =
+      {
+        games: game_path,
+        teams: team_path,
+        game_teams: game_teams_path
+      }
+      stat_tracker = StatTracker.from_csv(locations)
+      expect(stat_tracker.winningest_coach(20122013)).to eq("Claude Julien")
+    end
+  end
+
+  describe "#worst_coach" do
+    it "Can return the coach with the worst win percentage" do
+      game_path = './data/games.csv'
+      team_path = './data/teams.csv'
+      game_teams_path = './data/game_teams.csv'
+      locations =
+      {
+        games: game_path,
+        teams: team_path,
+        game_teams: game_teams_path
+      }
+      stat_tracker = StatTracker.from_csv(locations)
+      expect(stat_tracker.worst_coach("20132014")).to eq "Peter Laviolette"
+    end
+  end
+
+  describe "#fewest_tackles" do
+    it "Can return the team with the fewest tackles" do
+      game_path = './data/games.csv'
+      team_path = './data/teams.csv'
+      game_teams_path = './data/game_teams.csv'
+      locations =
+      {
+        games: game_path,
+        teams: team_path,
+        game_teams: game_teams_path
+      }
+      stat_tracker = StatTracker.from_csv(locations)
+      expect(stat_tracker.fewest_tackles("20132014")).to eq "Atlanta United"
+    end
+  end
 end
